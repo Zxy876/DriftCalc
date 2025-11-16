@@ -13,16 +13,21 @@ enum class StepType {
     FinalResult
 };
 
+struct Step;
+using StepPtr = std::shared_ptr<Step>;
+
 struct Step {
     StepType type;
-    std::string exprBefore;   // 步骤发生前的表达式（字符串）
-    std::string exprAfter;    // 步骤发生后的表达式（字符串）
-    std::string description;  // 文本解释（给草稿风渲染器）
-    std::vector<std::shared_ptr<Step>> children;
+
+    std::string exprBefore;   // 操作前表达式
+    std::string exprAfter;    // 操作后表达式
+    std::string description;  // 给渲染器用的文本说明
+
+    std::vector<StepPtr> children; // 子步骤
+
+    StepPtr parent = nullptr;      // ★关键：用于导航（上下左右移动）
 
     Step(StepType t) : type(t) {}
 };
-
-using StepPtr = std::shared_ptr<Step>;
 
 } // namespace driftcalc::steps

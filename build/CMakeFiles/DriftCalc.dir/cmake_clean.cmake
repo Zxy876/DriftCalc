@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DriftCalc.dir/src/main.cpp.o.d"
   "CMakeFiles/DriftCalc.dir/src/render/DraftRenderer.cpp.o"
   "CMakeFiles/DriftCalc.dir/src/render/DraftRenderer.cpp.o.d"
+  "CMakeFiles/DriftCalc.dir/src/steps/StepNavigator.cpp.o"
+  "CMakeFiles/DriftCalc.dir/src/steps/StepNavigator.cpp.o.d"
   "CMakeFiles/DriftCalc.dir/src/steps/StepTreeBuilder.cpp.o"
   "CMakeFiles/DriftCalc.dir/src/steps/StepTreeBuilder.cpp.o.d"
   "CMakeFiles/DriftCalc.dir/src/ui/CalculatorScreen.cpp.o"

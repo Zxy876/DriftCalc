@@ -1,13 +1,14 @@
 #pragma once
-
-#include "../expression/ASTNode.h"
+#include "Step.h"
 #include "StepTree.h"
+#include "../expression/ASTNode.h"
 
 namespace driftcalc::steps {
 
-class StepTreeBuilder {
+class StepTreeBuilder
+{
 public:
-    static StepTree build(const driftcalc::expr::ExprNode& expr);
+    StepTree build(const driftcalc::expr::ExprNode& rootExpr);
 };
 
 } // namespace driftcalc::steps

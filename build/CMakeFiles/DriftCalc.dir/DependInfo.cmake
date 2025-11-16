@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/zxydediannao/DriftCalc/src/expression/ExpressionEngine.cpp" "CMakeFiles/DriftCalc.dir/src/expression/ExpressionEngine.cpp.o" "gcc" "CMakeFiles/DriftCalc.dir/src/expression/ExpressionEngine.cpp.o.d"
   "/Users/zxydediannao/DriftCalc/src/main.cpp" "CMakeFiles/DriftCalc.dir/src/main.cpp.o" "gcc" "CMakeFiles/DriftCalc.dir/src/main.cpp.o.d"
   "/Users/zxydediannao/DriftCalc/src/render/DraftRenderer.cpp" "CMakeFiles/DriftCalc.dir/src/render/DraftRenderer.cpp.o" "gcc" "CMakeFiles/DriftCalc.dir/src/render/DraftRenderer.cpp.o.d"
+  "/Users/zxydediannao/DriftCalc/src/steps/StepNavigator.cpp" "CMakeFiles/DriftCalc.dir/src/steps/StepNavigator.cpp.o" "gcc" "CMakeFiles/DriftCalc.dir/src/steps/StepNavigator.cpp.o.d"
   "/Users/zxydediannao/DriftCalc/src/steps/StepTreeBuilder.cpp" "CMakeFiles/DriftCalc.dir/src/steps/StepTreeBuilder.cpp.o" "gcc" "CMakeFiles/DriftCalc.dir/src/steps/StepTreeBuilder.cpp.o.d"
   "/Users/zxydediannao/DriftCalc/src/ui/CalculatorScreen.cpp" "CMakeFiles/DriftCalc.dir/src/ui/CalculatorScreen.cpp.o" "gcc" "CMakeFiles/DriftCalc.dir/src/ui/CalculatorScreen.cpp.o.d"
   "/Users/zxydediannao/DriftCalc/src/ui/DriftScreen.cpp" "CMakeFiles/DriftCalc.dir/src/ui/DriftScreen.cpp.o" "gcc" "CMakeFiles/DriftCalc.dir/src/ui/DriftScreen.cpp.o.d"

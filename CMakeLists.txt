@@ -8,12 +8,11 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # ===== SFML 3 =====
 find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System)
 
-# ===== NanoVG (pure C library) =====
+# ===== NanoVG (C library) =====
 add_library(nanovg STATIC
     external/nanovg/src/nanovg.c
 )
 
-# 明确告诉 CMake：这个库使用 C
 set_target_properties(nanovg PROPERTIES
     LINKER_LANGUAGE C
     LANGUAGE C
@@ -23,24 +22,42 @@ target_include_directories(nanovg PUBLIC
     ${CMAKE_SOURCE_DIR}/external/nanovg/src
 )
 
-# ===== External includes =====
+# ===== External headers =====
 include_directories(
     ${CMAKE_SOURCE_DIR}/external/exprtk
     ${CMAKE_SOURCE_DIR}/external/tweeny/include
 )
 
-# ===== DriftCalc sources =====
-file(GLOB SOURCES
+# ========== 手动列出所有 DriftCalc 源文件（最稳定方式） ==========
+set(SOURCES
+
+    # ------- Main -------
     src/main.cpp
-    src/core/*.cpp
-    src/expression/*.cpp
-    src/steps/*.cpp
-    src/render/*.cpp
-    src/ui/*.cpp
+
+    # ------- core -------
+    src/core/App.cpp
+
+    # ------- expression -------
+    src/expression/ExpressionEngine.cpp
+    # 若你有 ASTNode.cpp，则加上：
+    # src/expression/ASTNode.cpp
+
+    # ------- steps -------
+    src/steps/StepNavigator.cpp
+    src/steps/StepTreeBuilder.cpp
+
+    # ------- render -------
+    src/render/DraftRenderer.cpp
+
+    # ------- ui -------
+    src/ui/CalculatorScreen.cpp
+    src/ui/DriftScreen.cpp
 )
 
+# ===== Create executable =====
 add_executable(DriftCalc ${SOURCES})
 
+# ===== Link =====
 target_link_libraries(DriftCalc
     SFML::Graphics
     SFML::Window

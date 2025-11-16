@@ -12,88 +12,71 @@ std::string toString(double v) {
     return oss.str();
 }
 
-// 递归生成步骤树
-StepPtr generateSteps(const ExprNode& node) {
-    // ---- NumberNode ----
+StepPtr buildStepNode(const ExprNode& node, StepPtr parent)
+{
+    // ---------- Number ----------
     if (auto num = dynamic_cast<const NumberNode*>(&node)) {
         StepPtr st = std::make_shared<Step>(StepType::EvaluateNumber);
-        double val = num->evaluate();
 
-        st->exprAfter = toString(val);
-        st->description = "识别到数字：" + toString(val);
+        st->exprBefore = toString(num->evaluate());
+        st->exprAfter  = toString(num->evaluate());
+        st->description = "数字节点：" + st->exprAfter;
+        st->parent = parent;
 
         return st;
     }
 
-    // ---- UnaryMinusNode ----
+    // ---------- Unary ----------
     if (auto un = dynamic_cast<const UnaryMinusNode*>(&node)) {
-        StepPtr step = std::make_shared<Step>(StepType::EvaluateUnary);
+        StepPtr st = std::make_shared<Step>(StepType::EvaluateUnary);
+        st->parent = parent;
 
-        // 子节点步骤
-        StepPtr childStep = generateSteps(un->childNode());
-        step->children.push_back(childStep);
+        StepPtr child = buildStepNode(un->getChild(), st);
+        st->children.push_back(child);
 
-        double val = node.evaluate();
-        step->exprAfter = "-" + childStep->exprAfter;
-        step->description = "对数字取反（前缀负号）";
+        st->exprBefore = "-" + child->exprAfter;
+        st->exprAfter  = "-" + child->exprAfter;
+        st->description = "取反运算";
 
-        return step;
+        return st;
     }
 
-    // ---- BinaryNode ----
+    // ---------- Binary ----------
     if (auto bin = dynamic_cast<const BinaryNode*>(&node)) {
-        StepPtr step = std::make_shared<Step>(StepType::EvaluateBinary);
+        StepPtr st = std::make_shared<Step>(StepType::EvaluateBinary);
+        st->parent = parent;
 
-        // 左右步骤
-        StepPtr L = generateSteps(bin->leftNode());
-        StepPtr R = generateSteps(bin->rightNode());
+        StepPtr L = buildStepNode(bin->getLeft(), st);
+        StepPtr R = buildStepNode(bin->getRight(), st);
 
-        step->children.push_back(L);
-        step->children.push_back(R);
+        st->children.push_back(L);
+        st->children.push_back(R);
 
-        double val = node.evaluate();
-        step->exprAfter = toString(val);
+        st->exprBefore = "(" + L->exprAfter + " ? " + R->exprAfter + ")";
+        st->exprAfter  = toString(node.evaluate());
+        st->description = "二元运算：" + st->exprAfter;
 
-        // 根据类型生成更友善的描述
-        if (dynamic_cast<const AddNode*>(&node)) {
-            step->description = "执行加法操作：左(" + L->exprAfter + ") + 右(" + R->exprAfter + ")";
-        } 
-        else if (dynamic_cast<const SubNode*>(&node)) {
-            step->description = "执行减法操作：左(" + L->exprAfter + ") - 右(" + R->exprAfter + ")";
-        } 
-        else if (dynamic_cast<const MulNode*>(&node)) {
-            step->description = "执行乘法操作：左(" + L->exprAfter + ") × 右(" + R->exprAfter + ")";
-        } 
-        else if (dynamic_cast<const DivNode*>(&node)) {
-            step->description = "执行除法操作：左(" + L->exprAfter + ") ÷ 右(" + R->exprAfter + ")";
-        } 
-        else if (dynamic_cast<const PowNode*>(&node)) {
-            step->description = "执行幂运算：左(" + L->exprAfter + ") ^ 右(" + R->exprAfter + ")";
-        }
-        else {
-            step->description = "执行二元运算";
-        }
-
-        return step;
+        return st;
     }
 
-    throw std::runtime_error("未知类型节点（StepTreeBuilder 无法识别）");
+    throw std::runtime_error("未知 AST 节点类型");
 }
 
-} // anonymous namespace
+} // namespace
 
 
-// ------------------------------------------------------------
-// 公开 API：构建步骤树
-// ------------------------------------------------------------
-StepTree StepTreeBuilder::build(const ExprNode& exprNode) {
-    StepPtr rootStep = generateSteps(exprNode);
 
-    // final wrapper step
+StepTree StepTreeBuilder::build(const ExprNode& exprNode)
+{
+    StepPtr root = buildStepNode(exprNode, nullptr);
+
     StepPtr finalStep = std::make_shared<Step>(StepType::FinalResult);
-    finalStep->children.push_back(rootStep);
-    finalStep->exprAfter = rootStep->exprAfter;
-    finalStep->description = "最终结果：" + rootStep->exprAfter;
+    finalStep->children.push_back(root);
+    root->parent = finalStep;
+
+    finalStep->exprBefore = root->exprBefore;
+    finalStep->exprAfter  = root->exprAfter;
+    finalStep->description = "最终结果：" + root->exprAfter;
 
     return StepTree(finalStep);
 }

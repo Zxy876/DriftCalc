@@ -909,7 +909,8 @@ CMakeFiles/DriftCalc.dir/src/main.cpp.o: \
   /Users/zxydediannao/DriftCalc/src/expression/ExpressionEngine.h \
   /Users/zxydediannao/DriftCalc/src/expression/ASTNode.h \
   /Users/zxydediannao/DriftCalc/src/steps/StepTreeBuilder.h \
-  /Users/zxydediannao/DriftCalc/src/steps/../expression/ASTNode.h \
-  /Users/zxydediannao/DriftCalc/src/steps/StepTree.h \
   /Users/zxydediannao/DriftCalc/src/steps/Step.h \
+  /Users/zxydediannao/DriftCalc/src/steps/StepTree.h \
+  /Users/zxydediannao/DriftCalc/src/steps/../expression/ASTNode.h \
+  /Users/zxydediannao/DriftCalc/src/steps/StepNavigator.h \
   /Users/zxydediannao/DriftCalc/src/render/DraftRenderer.h

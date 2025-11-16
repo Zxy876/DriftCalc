@@ -262,6 +262,30 @@ src/render/DraftRenderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DriftCalc.dir/build.make CMakeFiles/DriftCalc.dir/src/render/DraftRenderer.cpp.s
 .PHONY : src/render/DraftRenderer.cpp.s
 
+src/steps/StepNavigator.o: src/steps/StepNavigator.cpp.o
+.PHONY : src/steps/StepNavigator.o
+
+# target to build an object file
+src/steps/StepNavigator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DriftCalc.dir/build.make CMakeFiles/DriftCalc.dir/src/steps/StepNavigator.cpp.o
+.PHONY : src/steps/StepNavigator.cpp.o
+
+src/steps/StepNavigator.i: src/steps/StepNavigator.cpp.i
+.PHONY : src/steps/StepNavigator.i
+
+# target to preprocess a source file
+src/steps/StepNavigator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DriftCalc.dir/build.make CMakeFiles/DriftCalc.dir/src/steps/StepNavigator.cpp.i
+.PHONY : src/steps/StepNavigator.cpp.i
+
+src/steps/StepNavigator.s: src/steps/StepNavigator.cpp.s
+.PHONY : src/steps/StepNavigator.s
+
+# target to generate assembly for a file
+src/steps/StepNavigator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DriftCalc.dir/build.make CMakeFiles/DriftCalc.dir/src/steps/StepNavigator.cpp.s
+.PHONY : src/steps/StepNavigator.cpp.s
+
 src/steps/StepTreeBuilder.o: src/steps/StepTreeBuilder.cpp.o
 .PHONY : src/steps/StepTreeBuilder.o
 
@@ -359,6 +383,9 @@ help:
 	@echo "... src/render/DraftRenderer.o"
 	@echo "... src/render/DraftRenderer.i"
 	@echo "... src/render/DraftRenderer.s"
+	@echo "... src/steps/StepNavigator.o"
+	@echo "... src/steps/StepNavigator.i"
+	@echo "... src/steps/StepNavigator.s"
 	@echo "... src/steps/StepTreeBuilder.o"
 	@echo "... src/steps/StepTreeBuilder.i"
 	@echo "... src/steps/StepTreeBuilder.s"

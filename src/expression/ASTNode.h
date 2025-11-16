@@ -1,5 +1,4 @@
 #pragma once
-
 #include <memory>
 #include <stdexcept>
 #include <string>
@@ -20,6 +19,7 @@ public:
 
 using ExprNodePtr = std::unique_ptr<ExprNode>;
 
+
 //=============================
 // Number Node
 //=============================
@@ -33,6 +33,7 @@ private:
     double value;
 };
 
+
 //=============================
 // Binary Node Base
 //=============================
@@ -42,14 +43,16 @@ public:
     BinaryNode(ExprNodePtr lhs, ExprNodePtr rhs)
         : left(std::move(lhs)), right(std::move(rhs)) {}
 
-    // ⭐ 添加 getter，供 StepTreeBuilder 使用
-    const ExprNode& leftNode() const { return *left; }
-    const ExprNode& rightNode() const { return *right; }
-
 protected:
     ExprNodePtr left;
     ExprNodePtr right;
+
+public:
+    // ★★ 必须提供 getter，让外部可以访问 ★★
+    const ExprNode& getLeft()  const { return *left; }
+    const ExprNode& getRight() const { return *right; }
 };
+
 
 //=============================
 // Add
@@ -61,9 +64,10 @@ public:
 
     double evaluate() const override
     {
-        return leftNode().evaluate() + rightNode().evaluate();
+        return getLeft().evaluate() + getRight().evaluate();
     }
 };
+
 
 //=============================
 // Sub
@@ -75,9 +79,10 @@ public:
 
     double evaluate() const override
     {
-        return leftNode().evaluate() - rightNode().evaluate();
+        return getLeft().evaluate() - getRight().evaluate();
     }
 };
+
 
 //=============================
 // Mul
@@ -89,9 +94,10 @@ public:
 
     double evaluate() const override
     {
-        return leftNode().evaluate() * rightNode().evaluate();
+        return getLeft().evaluate() * getRight().evaluate();
     }
 };
+
 
 //=============================
 // Div
@@ -103,12 +109,13 @@ public:
 
     double evaluate() const override
     {
-        double denom = rightNode().evaluate();
+        double denom = getRight().evaluate();
         if (denom == 0.0)
             throw std::runtime_error("division by zero");
-        return leftNode().evaluate() / denom;
+        return getLeft().evaluate() / denom;
     }
 };
+
 
 //=============================
 // Pow
@@ -120,9 +127,10 @@ public:
 
     double evaluate() const override
     {
-        return std::pow(leftNode().evaluate(), rightNode().evaluate());
+        return std::pow(getLeft().evaluate(), getRight().evaluate());
     }
 };
+
 
 //=============================
 // Unary Minus
@@ -135,14 +143,15 @@ public:
 
     double evaluate() const override
     {
-        return -childNode().evaluate();
+        return -child->evaluate();
     }
-
-    // ⭐ Getter for StepTreeBuilder
-    const ExprNode& childNode() const { return *child; }
 
 private:
     ExprNodePtr child;
+
+public:
+    // ★★ getter ★★
+    const ExprNode& getChild() const { return *child; }
 };
 
 } // namespace driftcalc::expr

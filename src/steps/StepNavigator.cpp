@@ -1,6 +1,6 @@
 #include "StepNavigator.h"
 
-using namespace driftcalc::steps;
+namespace driftcalc::steps {
 
 StepNavigator::StepNavigator(StepPtr root)
     : rootStep(root), currentStep(root)
@@ -27,7 +27,7 @@ void StepNavigator::moveRight() {
     auto& siblings = currentStep->parent->children;
     int idx = indexStack.back();
 
-    if (idx < (int)siblings.size() - 1) {
+    if (idx < static_cast<int>(siblings.size()) - 1) {
         idx++;
         indexStack.back() = idx;
         currentStep = siblings[idx];
@@ -48,5 +48,11 @@ void StepNavigator::moveDown() {
     int parentIdx = indexStack.back();
 
     StepPtr parent = currentStep->parent;
-    currentStep = parent->children[parentIdx];
+    if (!parent) return;
+
+    if (parentIdx >= 0 && parentIdx < static_cast<int>(parent->children.size())) {
+        currentStep = parent->children[parentIdx];
+    }
 }
+
+} // namespace driftcalc::steps
