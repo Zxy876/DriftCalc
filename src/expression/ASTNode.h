@@ -42,6 +42,10 @@ public:
     BinaryNode(ExprNodePtr lhs, ExprNodePtr rhs)
         : left(std::move(lhs)), right(std::move(rhs)) {}
 
+    // ⭐ 添加 getter，供 StepTreeBuilder 使用
+    const ExprNode& leftNode() const { return *left; }
+    const ExprNode& rightNode() const { return *right; }
+
 protected:
     ExprNodePtr left;
     ExprNodePtr right;
@@ -57,7 +61,7 @@ public:
 
     double evaluate() const override
     {
-        return left->evaluate() + right->evaluate();
+        return leftNode().evaluate() + rightNode().evaluate();
     }
 };
 
@@ -71,7 +75,7 @@ public:
 
     double evaluate() const override
     {
-        return left->evaluate() - right->evaluate();
+        return leftNode().evaluate() - rightNode().evaluate();
     }
 };
 
@@ -85,7 +89,7 @@ public:
 
     double evaluate() const override
     {
-        return left->evaluate() * right->evaluate();
+        return leftNode().evaluate() * rightNode().evaluate();
     }
 };
 
@@ -99,10 +103,10 @@ public:
 
     double evaluate() const override
     {
-        double denom = right->evaluate();
+        double denom = rightNode().evaluate();
         if (denom == 0.0)
             throw std::runtime_error("division by zero");
-        return left->evaluate() / denom;
+        return leftNode().evaluate() / denom;
     }
 };
 
@@ -116,7 +120,7 @@ public:
 
     double evaluate() const override
     {
-        return std::pow(left->evaluate(), right->evaluate());
+        return std::pow(leftNode().evaluate(), rightNode().evaluate());
     }
 };
 
@@ -131,8 +135,11 @@ public:
 
     double evaluate() const override
     {
-        return -child->evaluate();
+        return -childNode().evaluate();
     }
+
+    // ⭐ Getter for StepTreeBuilder
+    const ExprNode& childNode() const { return *child; }
 
 private:
     ExprNodePtr child;

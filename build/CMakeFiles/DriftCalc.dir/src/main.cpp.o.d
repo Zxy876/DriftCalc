@@ -896,6 +896,7 @@ CMakeFiles/DriftCalc.dir/src/main.cpp.o: \
   /opt/homebrew/include/SFML/System/InputStream.hpp \
   /opt/homebrew/include/SFML/System/MemoryInputStream.hpp \
   /opt/homebrew/include/SFML/System/Sleep.hpp \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Users/zxydediannao/DriftCalc/external/exprtk/exprtk.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/list \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
@@ -907,4 +908,8 @@ CMakeFiles/DriftCalc.dir/src/main.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/fstream \
   /Users/zxydediannao/DriftCalc/src/expression/ExpressionEngine.h \
   /Users/zxydediannao/DriftCalc/src/expression/ASTNode.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream
+  /Users/zxydediannao/DriftCalc/src/steps/StepTreeBuilder.h \
+  /Users/zxydediannao/DriftCalc/src/steps/../expression/ASTNode.h \
+  /Users/zxydediannao/DriftCalc/src/steps/StepTree.h \
+  /Users/zxydediannao/DriftCalc/src/steps/Step.h \
+  /Users/zxydediannao/DriftCalc/src/render/DraftRenderer.h
