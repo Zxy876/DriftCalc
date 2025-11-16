@@ -1,0 +1,4 @@
+/Users/zxydediannao/DriftCalc/build/CMakeFiles/nanovg.dir
+/Users/zxydediannao/DriftCalc/build/CMakeFiles/DriftCalc.dir
+/Users/zxydediannao/DriftCalc/build/CMakeFiles/edit_cache.dir
+/Users/zxydediannao/DriftCalc/build/CMakeFiles/rebuild_cache.dir
